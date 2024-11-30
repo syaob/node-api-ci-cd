@@ -21,9 +21,36 @@ jobs:
 
       - name: Run tests
         run: npm test
+      name: CD
 
-      - name: Deploy to Render
-        uses: render-examples/deploy-to-render-action@v1
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Trigger Render Deployment
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+
+      # - name: Deploy to Render
+      #   uses: render-examples/deploy-to-render-action@v1
+      #   with:
+      #     api_key: ${{ secrets.RENDER_API_KEY }}
+      #     service_id: ${{ secrets.RENDER_SERVICE_ID }}
