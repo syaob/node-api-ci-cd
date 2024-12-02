@@ -3,9 +3,9 @@
   "version": "1.0.0 ",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "start:netlify": "netlify dev",
-    "build": "netlify build",
+    "start": "npx netlify dev",
+    "build": "npx netlify build",
+    "deploy": "npx netlify deploy",
     "test": "jest"
   },
   "jest": {
