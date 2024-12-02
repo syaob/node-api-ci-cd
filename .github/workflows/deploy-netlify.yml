@@ -1,36 +1,48 @@
 name: Deploy website
 
-on: [push]
+on:
+  push:
+    branches:
+      - main # Déclenche uniquement sur la branche `main`
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # Étape 1 : Récupération du code source
       - name: Repository Checkout
         uses: actions/checkout@v4
 
-      - name: Setup NodeJS
+      # Étape 2 : Configuration de Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: 20 # Utiliser la version Node.js 20
+          cache: npm # Activer le cache npm pour accélérer les builds
 
-      - name: Install Netlify
+      # Étape 3 : Installer Netlify CLI
+      - name: Install Netlify CLI
         run: npm install netlify-cli@17.10.1 -g
 
+      # Étape 4 : Installer les dépendances
       - name: Install Dependencies
-        run: npm ci
-00
-      - name: Build project
-        run: npm run build
+        run: npm ci # `ci` garantit une installation propre avec `package-lock.json`
 
+      # Étape 5 : Construire le projet
+      - name: Build Project
+        run: npm run build # Assurez-vous que ce script génère un dossier `dist`
+
+      # Étape 6 : Déployer sur Netlify
       - name: Deploy to Netlify
-        id: netlify_deploy
         run: |
           netlify deploy \
-            --dir dist \
-            --site ${{ secrets.NETLIFY_SITE_ID }} \
-            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            --dir=dist \ # Chemin du dossier généré par le build
+            --prod \ # Déployer directement en production
+            --site=${{ secrets.NETLIFY_SITE_ID }} \ # Utiliser l'ID du site
+            --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} # Token d'authentification
+
+
 # name: CD Netlify V2
 
 # on:
