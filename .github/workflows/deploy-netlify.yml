@@ -2,8 +2,8 @@ name: CD Netlify V2
 
 on:
   push:
-    # branches:
-    #   - netlify-deployment
+    branches:
+      - netlify-deployment
 
 jobs:
   deploy:
@@ -23,9 +23,7 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test
-
-      — uses: actions/checkout@v3 
+        run: npm test 
 
       — name: “Deployed site” 
         run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
