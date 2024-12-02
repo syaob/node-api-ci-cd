@@ -1,4 +1,4 @@
-name: CD Netlify
+name: CD Netlify V2
 
 on:
   push:
