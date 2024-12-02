@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jest",
-    "build": "npm run build"
+    "start": "netlify dev",
+    "build": "netlify build",
+    "test": "jest"
   },
   "jest": {
     "testEnvironment": "node"
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "netlify-cli": "^17.37.2",
     "supertest": "^7.0.0"
   }
 }
