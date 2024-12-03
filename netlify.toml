@@ -1,6 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
-
-[context.production]
-  site_id = "4f8190a0-d090-422e-8e54-8bf25d35b578"
+  functions = "functions"
+  node_version = "20.18.0"

@@ -1,11 +1,11 @@
 {
   "name": "api-ci-cd",
-  "version": "1.0.0",
+  "version": "1.0.0 ",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "start:netlify": "netlify dev",
-    "build": "netlify build",
+    "start": "npx netlify dev",
+    "build": "npx netlify build",
+    "deploy": "npx netlify deploy",
     "test": "jest"
   },
   "jest": {
@@ -21,11 +21,10 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "netlify-cli": "^17.37.2",
     "supertest": "^7.0.0"
   },
   "engines": {
-  "node": ">=18"
-}
-
-
+    "node": ">=18"
+  }
 }
